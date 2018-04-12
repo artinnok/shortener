@@ -1,6 +1,8 @@
-hash: d1fabb809e025005b487e7dfb5e20bb080a15c1105cb1df44560d0f4ef535b82
-updated: 2018-04-12T23:05:41.815767+09:00
+hash: 6b1b49451096326c3f5a7a1a842804d50cef429ba0f0ba16e738b29fbb58fc3a
+updated: 2018-04-12T23:18:27.611236+09:00
 imports:
 - name: github.com/jinzhu/gorm
   version: 6ed508ec6a4ecb3531899a69cbc746ccf65a4166
+- name: github.com/labstack/echo
+  version: a5d81b8d4a627f3f49dcb3164ef2bb5239682227
 testImports: []

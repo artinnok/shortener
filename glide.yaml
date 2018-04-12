@@ -2,3 +2,5 @@ package: .
 import:
 - package: github.com/jinzhu/gorm
   version: ^1.9.1
+- package: github.com/labstack/echo
+  version: ^3.3.4
