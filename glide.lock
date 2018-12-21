@@ -1,8 +1,12 @@
-hash: 6b1b49451096326c3f5a7a1a842804d50cef429ba0f0ba16e738b29fbb58fc3a
-updated: 2018-12-20T19:25:21.983211+09:00
+hash: bcb0eccdeae36bd8e83a90a58f7214dffe1aeb38dc42f96126503c13960d88e2
+updated: 2018-12-21T17:01:25.706057+09:00
 imports:
 - name: github.com/jinzhu/gorm
   version: 472c70caa40267cb89fd8facb07fe6454b578626
+  subpackages:
+  - dialects/postgres
+- name: github.com/jinzhu/inflection
+  version: 04140366298a54a039076d798123ffa108fff46c
 - name: github.com/labstack/echo
   version: c7eb8da9ec73e78c4f38413f3f835e0cd52c7d72
 - name: github.com/labstack/gommon
@@ -10,6 +14,11 @@ imports:
   subpackages:
   - color
   - log
+- name: github.com/lib/pq
+  version: 4ded0e9383f75c197b3a2aaa6d590ac52df6fd79
+  subpackages:
+  - hstore
+  - oid
 - name: github.com/mattn/go-colorable
   version: efa589957cd060542a26d2dd7832fd6a6c6c3ade
 - name: github.com/mattn/go-isatty

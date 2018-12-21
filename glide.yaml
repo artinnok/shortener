@@ -4,3 +4,7 @@ import:
   version: ^1.9.1
 - package: github.com/labstack/echo
   version: ^3.3.4
+- package: github.com/lib/pq
+  version: ^1.0.0
+  subpackages:
+  - hstore
