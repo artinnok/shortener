@@ -1,37 +1,15 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
-
 	"github.com/labstack/echo"
-	"github.com/jinzhu/gorm"
-
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"net/http"
+	"shortener/web"
 )
 
-type ShortifyForm struct {
-	Link string `json:"link"`
-}
-
 type Response struct {
-	Success bool `json:"success"`
+	Success bool        `json:"success"`
 	Payload interface{} `json:"payload"`
-}
-
-type URLModel struct {
-	gorm.Model
-	Link string
-	ShortLink string
-}
-
-func getDb() *gorm.DB {
-	db, err := gorm.Open("postgres", "host=localhost port=5435 user=short dbname=short password=short sslmode=disable")
-	if err != nil {
-		panic(err)
-	}
-
-	return db
 }
 
 func hello(c echo.Context) error {
@@ -43,14 +21,14 @@ func hello(c echo.Context) error {
 }
 
 func shortify(c echo.Context) (err error) {
-	form := new(ShortifyForm)
+	form := new(web.ShortifyForm)
 	if err = c.Bind(form); err != nil {
 		response := Response{Success: false, Payload: "invalid_data"}
 		return c.JSON(http.StatusForbidden, &response)
 	}
 
-	db := getDb()
-	url := URLModel{Link: form.Link}
+	db := web.GetDb()
+	url := web.URLModel{LongLink: form.LongLink}
 
 	db.Create(&url)
 	defer db.Close()
@@ -59,16 +37,22 @@ func shortify(c echo.Context) (err error) {
 	return c.JSON(http.StatusOK, &response)
 }
 
+func longify(c echo.Context) (err error) {
+	response := Response{Success: false, Payload: "longify"}
+	return c.JSON(http.StatusOK, &response)
+}
+
 func main() {
 	e := echo.New()
 
-	db := getDb()
+	db := web.GetDb()
 
-	db.AutoMigrate(&URLModel{})
+	db.AutoMigrate(&web.URLModel{})
 	defer db.Close()
 
 	e.GET("/hello/:username", hello)
 	e.POST("/shortify", shortify)
+	e.POST("/longify", longify)
 
 	e.Logger.Fatal(e.Start("127.0.0.1:9000"))
 }
